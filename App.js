@@ -16,6 +16,8 @@ export default function App() {
   );
 }
 
+// commment
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
