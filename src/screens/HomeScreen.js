@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../global/styles';
 import {Data} from '../global/Data';
 import {color} from '@rneui/base';
+import Card from '../components/Card';
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
@@ -115,6 +116,8 @@ export default function HomeScreen({navigation}) {
               </TouchableOpacity>
             )}></FlatList>
         </View>
+
+        <Card></Card>
       </ScrollView>
     </View>
   );
@@ -174,7 +177,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: colors.blue,
   },
   smallCardIcon: {
     backgroundColor: colors.white,

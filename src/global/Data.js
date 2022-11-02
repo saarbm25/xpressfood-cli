@@ -1,3 +1,56 @@
+export const restaurantData = [
+  {
+    restaurantName: 'Mc Donanlds',
+    Distance: '21.2',
+    Address: '22 Whatever Street, Some Town',
+    image: 'https://picsum.photos/200/300.jpg',
+    averageReview: 4.9,
+    numberOfReviews: 272,
+    coordinates: {lat: -26.1882344, lng: 28.236423},
+    discount: 10,
+    deliveryTime: 15,
+    collectTime: 5,
+    foodType: 'Burgers, Wraps, Milkshakes...',
+    productData: [
+      {
+        name: 'Hand cut chips',
+        price: 29.3,
+        image: 'https://picsum.photos/300/300.jpg',
+      },
+      {
+        name: 'Leg cut chips',
+        price: 22.3,
+        image: 'https://picsum.photos/300/200.jpg',
+      },
+    ],
+  },
+  {
+    restaurantName: 'Dc Monanlds',
+    Distance: '21.2',
+    Address: '22 Whatever Street, Some Town',
+    image: 'https://picsum.photos/200/300.jpg',
+    averageReview: 4.9,
+    numberOfReviews: 272,
+    coordinates: {lat: -26.1882344, lng: 28.236423},
+    discount: 10,
+    deliveryTime: 15,
+    collectTime: 5,
+    foodType: 'Burgers, Wraps, Milkshakes...',
+    productData: [
+      {
+        name: 'Hand cut chips',
+        price: 29.3,
+        image: 'https://picsum.photos/300/300.jpg',
+      },
+      {
+        name: 'Leg cut chips',
+        price: 22.3,
+        image: 'https://picsum.photos/300/200.jpg',
+      },
+    ],
+  },
+];
+
 export const Data = [
   {
     id: '0',
