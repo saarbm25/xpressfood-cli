@@ -22,7 +22,7 @@ export default function SignInScreen({navigation}) {
           </View>
           <AppTextInput placeholder='Email' icon='mail'></AppTextInput>
           <AppTextInput placeholder='Password' icon='lock' secure={true}></AppTextInput>
-          <AppButton>SIGN IN</AppButton>
+          <AppButton onPress={() => navigation.navigate("HomeScreen")}>SIGN IN</AppButton>
           <TouchableOpacity style={{alignItems: 'center', marginVertical: 20}}>
               <Text style={[styles.smallText, {fontSize: 14, textDecorationLine: 'underline'}]}>
                   Forgot Password?
