@@ -4,7 +4,7 @@ import {colors} from '../../global/styles';
 import ImagesSwiper from 'react-native-image-swiper'
 import AppButton from '../../components/AppButton';
 
-export default function SignInWelcomeScreen() {
+export default function SignInWelcomeScreen({navigation}) {
   return (
     <View style={{flex: 1}}>
       <Text style={styles.title}>DISCOVER RESTAURANTS{'\n'}IN YOUR AREA</Text>
@@ -20,7 +20,7 @@ export default function SignInWelcomeScreen() {
         </ScrollView>
       </View>
       <View style={{marginBottom: 10}}>
-        <AppButton>SIGN IN</AppButton>
+        <AppButton onPress={() => navigation.navigate("SignInScreen")}>SIGN IN</AppButton>
         <AppButton inverted={true}>Create your account</AppButton>
       </View>
     </View>

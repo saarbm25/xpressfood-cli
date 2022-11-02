@@ -4,10 +4,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors, parameters } from '../global/styles' 
 
-function Header({title, icon}) {
+function Header({title, icon, onPress}) {
     return (
         <View style={styles.header}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPress}>
               <Icon name={icon} size={28} color={colors.white}></Icon>
             </TouchableOpacity>
                 <View>

@@ -6,10 +6,10 @@ import Header from '../../components/Header';
 import AppTextInput from '../../components/AppTextInput';
 import AppButton from '../../components/AppButton';
 
-export default function SignInScreen() {
+export default function SignInScreen({navigation}) {
   return (
       <View style={styles.container}>
-          <Header title='MY ACCOUNT' icon='arrow-left'></Header>
+          <Header title='MY ACCOUNT' icon='arrow-left' onPress={() => navigation.goBack()}></Header>
           <View style={{padding: 10}}>
               <Text style={globalStyles.title}>
                   Sign-In

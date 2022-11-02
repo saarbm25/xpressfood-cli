@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import Header from './src/components/Header';
+import 'react-native-gesture-handler';
 import React from 'react';
 import { colors } from './src/global/styles';
-import SignInScreen from './src/screens/authScreens/SignInScreen';
-import SignInWelcomeScreen from './src/screens/authScreens/SignInWelcomeScreen';
+import RootNavigator from './src/navigation/RootNavigator';
 
 
 
@@ -13,8 +12,7 @@ export default function App() {
       <StatusBar
         barStyle='light-content'
         backgroundColor={colors.statusBar}></StatusBar>
-      {/* <SignInScreen></SignInScreen> */}
-      <SignInWelcomeScreen></SignInWelcomeScreen>
+      <RootNavigator></RootNavigator>
     </View>
   );
 }

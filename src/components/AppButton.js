@@ -3,14 +3,18 @@ import React from 'react';
 import { colors } from '../global/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function AppButton({ color = colors.button, textColor = colors.white, width = 'auto', inverted, icon, children }) {
+export default function AppButton({ color = colors.button,
+    textColor = colors.white,
+    width = 'auto', inverted,
+    icon, children, onPress}) {
     if (inverted === true) {
         const temp = color;
         color = textColor;
         textColor = temp;
     }
   return (
-    <TouchableOpacity style={[styles.button, { backgroundColor: color, borderColor: textColor, width: width}]}>
+      <TouchableOpacity style={[styles.button, { backgroundColor: color, borderColor: textColor, width: width }]}
+                        onPress={onPress}>
         {icon && <Icon name={icon} size={28} color={textColor} style={styles.icon}></Icon>}
         <Text style={[icon ? styles.iconButtonText : styles.buttonText, {color: textColor}]}>{children}</Text>
     </TouchableOpacity>
