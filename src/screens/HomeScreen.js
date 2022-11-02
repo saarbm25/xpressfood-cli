@@ -1,12 +1,23 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Pressable,
+} from 'react-native';
 import React, {useState} from 'react';
 import Header from '../components/Header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../global/styles';
+import {Data} from '../global/Data';
+import {color} from '@rneui/base';
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
+  const [indexCheck, useIndexCheck] = useState('0');
+
   const setDelivery = () => {
     useDelivery(true);
   };
@@ -66,6 +77,44 @@ export default function HomeScreen({navigation}) {
         <View style={styles.separator}>
           <Text style={styles.separatorText}>Categories</Text>
         </View>
+
+        <View>
+          <FlatList
+            data={Data}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            extraData={indexCheck}
+            renderItem={({item, index}) => (
+              <TouchableOpacity
+                onPress={() => useIndexCheck(item.id)}
+                style={
+                  item.id === indexCheck
+                    ? styles.checkedSmallCardContainer
+                    : styles.smallCardContainer
+                }>
+                <View style={styles.smallCardContent}>
+                  <Icon
+                    style={
+                      item.id === indexCheck
+                        ? styles.checkedSmallCardIcon
+                        : styles.smallCardIcon
+                    }
+                    name={item.icon}
+                    size={28}
+                    color={colors.grey2}></Icon>
+                  <Text
+                    style={
+                      item.id === indexCheck
+                        ? styles.checkedSmallCardText
+                        : styles.smallCardText
+                    }>
+                    {item.name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}></FlatList>
+        </View>
       </ScrollView>
     </View>
   );
@@ -106,5 +155,47 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     paddingVertical: 2,
+  },
+  smallCardContainer: {
+    height: 100,
+    width: 85,
+    margin: 5,
+    backgroundColor: colors.grey5,
+    borderRadius: 30,
+  },
+  checkedSmallCardContainer: {
+    height: 100,
+    width: 85,
+    margin: 5,
+    backgroundColor: colors.button,
+    borderRadius: 30,
+  },
+  smallCardContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: colors.blue,
+  },
+  smallCardIcon: {
+    backgroundColor: colors.white,
+    borderRadius: 100,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkedSmallCardIcon: {
+    backgroundColor: colors.white,
+    borderRadius: 100,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: colors.button,
+  },
+  smallCardText: {
+    fontWeight: 'bold',
+  },
+  checkedSmallCardText: {
+    fontWeight: 'bold',
+    color: colors.white,
   },
 });
