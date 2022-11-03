@@ -5,15 +5,18 @@ import {
   ScrollView,
   FlatList,
   Pressable,
+  Dimensions,
 } from 'react-native';
 import React, {useState} from 'react';
 import Header from '../components/Header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../global/styles';
-import {Data} from '../global/Data';
+import {Data, restaurantData} from '../global/Data';
 import {color} from '@rneui/base';
 import Card from '../components/Card';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
@@ -117,7 +120,27 @@ export default function HomeScreen({navigation}) {
             )}></FlatList>
         </View>
 
-        <Card></Card>
+        <View style={styles.separator}>
+          <Text style={styles.separatorText}>Free delivery now</Text>
+        </View>
+
+        <View>
+          <FlatList
+            horizontal={true}
+            data={restaurantData}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <Card
+                image={item.image}
+                restaurant={item.restaurantName}
+                distance={item.distance}
+                averageReview={item.averageReview}
+                numberOfReviews={item.numberOfReviews}
+                address={item.address}
+                screenWidth="80%"></Card>
+            )}></FlatList>
+        </View>
       </ScrollView>
     </View>
   );
