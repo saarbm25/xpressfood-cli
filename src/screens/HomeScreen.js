@@ -32,116 +32,164 @@ export default function HomeScreen({navigation}) {
   return (
     <View>
       <Header title="XpressFood" icon="menu" cart={true}></Header>
-      <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={true}>
-        <View>
-          <View style={styles.tabButtonContainer}>
-            <TouchableOpacity
-              onPress={setDelivery}
-              style={[
-                styles.tabButton,
-                {backgroundColor: delivery ? colors.button : colors.grey5},
-              ]}>
-              <Text style={styles.buttonText}>Delivery</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={setPickUp}
-              style={[
-                styles.tabButton,
-                {backgroundColor: !delivery ? colors.button : colors.grey5},
-              ]}>
-              <Text style={styles.buttonText}>Pick-up</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.spaceTimeContainer}>
-            <View style={styles.tabButtonContainer}>
-              <Icon
-                style={{marginHorizontal: 5}}
-                name="map-marker"
-                size={28}
-                color={colors.grey2}></Icon>
-              <Text style={styles.buttonText}>22 Whatever Street</Text>
-            </View>
-            <View style={styles.tabButtonContainer}>
-              <Icon
-                style={{marginHorizontal: 5}}
-                name="clock"
-                size={28}
-                color={colors.grey2}></Icon>
-              <Text style={styles.buttonText}>Now</Text>
-            </View>
-          </View>
-          <TouchableOpacity style={{marginRight: 20}}>
-            <Icon name="tune" size={28} color={colors.grey2}></Icon>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.separator}>
-          <Text style={styles.separatorText}>Categories</Text>
-        </View>
-
-        <View>
-          <FlatList
-            data={Data}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={item => item.id}
-            extraData={indexCheck}
-            renderItem={({item, index}) => (
+      <View style={{height: '94.5%'}}>
+        <ScrollView
+          stickyHeaderIndices={[0]}
+          showsVerticalScrollIndicator={true}>
+          <View>
+            <View style={[styles.tabButtonContainer]}>
               <TouchableOpacity
-                onPress={() => useIndexCheck(item.id)}
-                style={
-                  item.id === indexCheck
-                    ? styles.checkedSmallCardContainer
-                    : styles.smallCardContainer
-                }>
-                <View style={styles.smallCardContent}>
-                  <Icon
-                    style={
-                      item.id === indexCheck
-                        ? styles.checkedSmallCardIcon
-                        : styles.smallCardIcon
-                    }
-                    name={item.icon}
-                    size={28}
-                    color={colors.grey2}></Icon>
-                  <Text
-                    style={
-                      item.id === indexCheck
-                        ? styles.checkedSmallCardText
-                        : styles.smallCardText
-                    }>
-                    {item.name}
-                  </Text>
-                </View>
+                onPress={setDelivery}
+                style={[
+                  styles.tabButton,
+                  {backgroundColor: delivery ? colors.button : colors.grey5},
+                ]}>
+                <Text style={styles.buttonText}>Delivery</Text>
               </TouchableOpacity>
-            )}></FlatList>
-        </View>
+              <TouchableOpacity
+                onPress={setPickUp}
+                style={[
+                  styles.tabButton,
+                  {backgroundColor: !delivery ? colors.button : colors.grey5},
+                ]}>
+                <Text style={styles.buttonText}>Pick-up</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
-        <View style={styles.separator}>
-          <Text style={styles.separatorText}>Free delivery now</Text>
-        </View>
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.spaceTimeContainer}>
+              <View style={styles.tabButtonContainer}>
+                <Icon
+                  style={{marginHorizontal: 5}}
+                  name="map-marker"
+                  size={28}
+                  color={colors.grey2}></Icon>
+                <Text style={styles.buttonText}>22 Whatever Street</Text>
+              </View>
+              <View style={styles.tabButtonContainer}>
+                <Icon
+                  style={{marginHorizontal: 5}}
+                  name="clock"
+                  size={28}
+                  color={colors.grey2}></Icon>
+                <Text style={styles.buttonText}>Now</Text>
+              </View>
+            </View>
+            <TouchableOpacity style={{marginRight: 20}}>
+              <Icon name="tune" size={28} color={colors.grey2}></Icon>
+            </TouchableOpacity>
+          </View>
 
-        <View>
-          <FlatList
-            horizontal={true}
-            data={restaurantData}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <Card
-                image={item.image}
-                restaurant={item.restaurantName}
-                distance={item.distance}
-                averageReview={item.averageReview}
-                numberOfReviews={item.numberOfReviews}
-                address={item.address}
-                screenWidth="80%"></Card>
-            )}></FlatList>
-        </View>
-      </ScrollView>
+          <View style={styles.separator}>
+            <Text style={styles.separatorText}>Categories</Text>
+          </View>
+
+          <View>
+            <FlatList
+              data={Data}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              extraData={indexCheck}
+              renderItem={({item, index}) => (
+                <TouchableOpacity
+                  onPress={() => useIndexCheck(item.id)}
+                  style={
+                    item.id === indexCheck
+                      ? styles.checkedSmallCardContainer
+                      : styles.smallCardContainer
+                  }>
+                  <View style={styles.smallCardContent}>
+                    <Icon
+                      style={
+                        item.id === indexCheck
+                          ? styles.checkedSmallCardIcon
+                          : styles.smallCardIcon
+                      }
+                      name={item.icon}
+                      size={28}
+                      color={colors.grey2}></Icon>
+                    <Text
+                      style={
+                        item.id === indexCheck
+                          ? styles.checkedSmallCardText
+                          : styles.smallCardText
+                      }>
+                      {item.name}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}></FlatList>
+          </View>
+
+          <View style={styles.separator}>
+            <Text style={styles.separatorText}>Free delivery now</Text>
+          </View>
+
+          <View>
+            <FlatList
+              horizontal={true}
+              data={restaurantData}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <Card
+                  image={item.image}
+                  restaurant={item.restaurantName}
+                  distance={item.distance}
+                  averageReview={item.averageReview}
+                  numberOfReviews={item.numberOfReviews}
+                  address={item.address}
+                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
+              )}></FlatList>
+          </View>
+
+          <View style={styles.separator}>
+            <Text style={styles.separatorText}>Promotions avaliable</Text>
+          </View>
+
+          <View>
+            <FlatList
+              horizontal={true}
+              data={restaurantData}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <Card
+                  image={item.image}
+                  restaurant={item.restaurantName}
+                  distance={item.distance}
+                  averageReview={item.averageReview}
+                  numberOfReviews={item.numberOfReviews}
+                  address={item.address}
+                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
+              )}></FlatList>
+          </View>
+
+          <View style={styles.separator}>
+            <Text style={styles.separatorText}>Restaurants in your area</Text>
+          </View>
+
+          <View>
+            <FlatList
+              horizontal={true}
+              data={restaurantData}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <Card
+                  image={item.image}
+                  restaurant={item.restaurantName}
+                  distance={item.distance}
+                  averageReview={item.averageReview}
+                  numberOfReviews={item.numberOfReviews}
+                  address={item.address}
+                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
+              )}></FlatList>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -159,6 +207,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.grey5,
+    marginBottom: 5,
   },
   buttonText: {
     fontWeight: 'bold',
