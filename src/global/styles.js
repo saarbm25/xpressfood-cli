@@ -13,6 +13,7 @@ export const colors = {
     red: '#DB4437',
     blue: '#3b5998',
     white: 'white',
+    black: 'black'
 }
 
 export const parameters = {

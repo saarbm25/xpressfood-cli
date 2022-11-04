@@ -3,9 +3,9 @@ import React from 'react';
 
 export default function MyAccountScreen() {
   return (
-    <View>
-      <Text>MyAccountScreen</Text>
-    </View>
+      <View>
+        <Text>Get directions to your location</Text>
+      </View>
   );
 }
 

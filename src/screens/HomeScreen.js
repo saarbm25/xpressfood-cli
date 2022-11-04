@@ -189,12 +189,38 @@ export default function HomeScreen({navigation}) {
               )}></FlatList>
           </View>
         </ScrollView>
+
+        <View style={styles.mapButtonContainer}>
+          <TouchableOpacity
+            style={styles.mapButton}
+            onPress={() => navigation.navigate('RestaurantsMapScreen')}>
+            <Icon name="map-marker" size={28} color={colors.button}></Icon>
+            <Text style={{fontWeight: 'bold'}}>Map</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  mapButtonContainer: {
+    position: 'absolute',
+    bottom: 10,
+    right: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mapButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 10,
+    shadowColor: colors.black,
+  },
   tabButton: {
     width: 100,
     height: 30,

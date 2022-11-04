@@ -6,13 +6,14 @@ import SignInWelcomeScreen from '../screens/authScreens/SignInWelcomeScreen';
 import SignInScreen from '../screens/authScreens/SignInScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ClientTabs from './ClientTabs';
+import RestaurantsMapScreen from '../screens/RestaurantsMapScreen';
 
-const authStack = createStackNavigator();
+const screenStack = createStackNavigator();
 
-export default function AuthStack() {
+export default function ScreenStack() {
   return (
-    <authStack.Navigator>
-      <authStack.Screen
+    <screenStack.Navigator>
+      <screenStack.Screen
         name="SignInWelcomeScreen"
         component={SignInWelcomeScreen}
         options={{
@@ -20,7 +21,7 @@ export default function AuthStack() {
           ...TransitionPresets.RevealFromBottomAndroid,
         }}
       />
-      <authStack.Screen
+      <screenStack.Screen
         name="SignInScreen"
         component={SignInScreen}
         options={{
@@ -28,7 +29,7 @@ export default function AuthStack() {
           ...TransitionPresets.RevealFromBottomAndroid,
         }}
       />
-      <authStack.Screen
+      <screenStack.Screen
         name="ClientTabs"
         component={ClientTabs}
         options={{
@@ -36,6 +37,14 @@ export default function AuthStack() {
           ...TransitionPresets.RevealFromBottomAndroid,
         }}
       />
-    </authStack.Navigator>
+      <screenStack.Screen
+        name="RestaurantsMapScreen"
+        component={RestaurantsMapScreen}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+    </screenStack.Navigator>
   );
 }
