@@ -5,11 +5,34 @@ import {
   Animated,
   Easing,
   useWindowDimensions,
+  PanResponder,
 } from 'react-native';
 import React, {useEffect, useState, useRef} from 'react';
 import {colors} from '../global/styles';
 
 export default function SearchScreen() {
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onPanResponderMove: (evt, gestureState) => {
+        const {x, y} = convertToCircle(
+          evt.nativeEvent.pageX,
+          evt.nativeEvent.pageY,
+          100,
+          width / 2,
+          height / 2,
+        );
+        gestureState.moveX;
+        touch.setValue({
+          x: x,
+          y: y,
+        });
+        // The most recent move distance is gestureState.move{X,Y}
+        // The accumulated gesture distance since becoming responder is
+        // gestureState.d{x,y}
+      },
+    }),
+  ).current;
   const dim = useWindowDimensions();
   const width = dim.width;
   const height = dim.height;
@@ -17,26 +40,20 @@ export default function SearchScreen() {
     new Animated.ValueXY({x: width / 2, y: height / 2}),
   ).current;
 
+  const convertToCircle = (x, y, r, xA, yA) => {
+    let circleX = xA - x;
+    let circleY = yA - y;
+    const dist = (circleX ** 2 + circleY ** 2) ** 0.5;
+    circleX = (circleX / dist) * r;
+    circleY = (circleY / dist) * r;
+
+    // console.log({x: circleX, y: circleY, dist: dist});
+    return {x: -circleX + xA, y: -circleY + yA};
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...panResponder.panHandlers}>
       <Animated.View
-        onStartShouldSetResponder={() => true}
-        onResponderRelease={() => {
-          Animated.spring(touch, {
-            toValue: {
-              y: height / 2,
-              x: width / 2,
-            },
-            useNativeDriver: false,
-          }).start();
-        }}
-        onResponderMove={event => {
-          touch.setValue({
-            x: event.nativeEvent.pageX,
-            y: event.nativeEvent.pageY,
-          });
-          // console.log(touch)
-        }}
         style={[
           styles.squre,
           {
@@ -45,6 +62,11 @@ export default function SearchScreen() {
             top: Animated.subtract(touch.y, 25),
           },
         ]}></Animated.View>
+      <View
+        style={[
+          styles.circleOutline,
+          {top: height / 2 - 100, left: width / 2 - 100},
+        ]}></View>
     </View>
   );
 }
@@ -59,5 +81,16 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: colors.button,
+    borderRadius: 25,
+  },
+  circleOutline: {
+    width: 200,
+    height: 200,
+    position: 'absolute',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    borderRadius: 100,
+    borderColor: colors.black,
+    borderWidth: 1,
   },
 });
