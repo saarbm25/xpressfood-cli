@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, Animated, useWindowDimensions} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  useWindowDimensions,
+} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {colors} from '../global/styles';
 
@@ -6,7 +12,6 @@ export default function MyOrdersScreen() {
   const dim = useWindowDimensions();
   const width = dim.width;
   const translation = useRef(new Animated.Value(width / 2)).current;
-  
 
   // useEffect(() => {
   //   Animated.sequence([
@@ -29,7 +34,6 @@ export default function MyOrdersScreen() {
       onStartShouldSetResponder={() => true}
       onResponderMove={event => {
         translation.setValue(event.nativeEvent.pageX);
-        console.log(translation);
       }}>
       <Animated.View
         style={[

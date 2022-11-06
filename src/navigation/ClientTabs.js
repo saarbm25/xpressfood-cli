@@ -7,6 +7,7 @@ import {colors} from '../global/styles';
 import MyAccountScreen from '../screens/MyAccountScreen';
 import SearchScreen from '../screens/SearchScreen';
 import MyOrdersScreen from '../screens/MyOrdersScreen';
+import AnimationScreen from '../screens/AnimationScreen';
 
 const clientTabs = createBottomTabNavigator();
 
@@ -52,6 +53,16 @@ export default function ClientTabs() {
           tabBarLabel: 'My Account',
           tabBarIcon: ({color, size}) => (
             <Icon name="account" size={size} color={color}></Icon>
+          ),
+        }}></clientTabs.Screen>
+      <clientTabs.Screen
+        name="AnimationScreen"
+        component={AnimationScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Animation',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="circle" size={size} color={color}></Icon>
           ),
         }}></clientTabs.Screen>
     </clientTabs.Navigator>
