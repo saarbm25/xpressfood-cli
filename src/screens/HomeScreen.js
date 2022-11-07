@@ -1,20 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  Pressable,
-  Dimensions,
-} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import Header from '../components/Header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../global/styles';
 import {Data, restaurantData} from '../global/Data';
-import {color} from '@rneui/base';
-import Card from '../components/Card';
 import SmallItemPicker from '../components/SmallItemPicker';
 import TextSeparator from '../components/TextSeparator';
 import CardFlatList from '../components/CardFlatList';
@@ -23,7 +13,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
-  const [indexCheck, useIndexCheck] = useState('0');
   const [checkedIndex, setCheckedIndex] = useState('0');
 
   const setDelivery = () => {
@@ -36,6 +25,7 @@ export default function HomeScreen({navigation}) {
   return (
     <View>
       <Header title="XpressFood" icon="menu" cart={true}></Header>
+
       <View style={{height: '94.5%'}}>
         <ScrollView
           stickyHeaderIndices={[0]}
@@ -60,6 +50,7 @@ export default function HomeScreen({navigation}) {
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={{flexDirection: 'row'}}>
             <View style={styles.spaceTimeContainer}>
               <View style={styles.tabButtonContainer}>
@@ -83,12 +74,12 @@ export default function HomeScreen({navigation}) {
               <Icon name="tune" size={28} color={colors.grey2}></Icon>
             </TouchableOpacity>
           </View>
+
           <TextSeparator>Categories</TextSeparator>
-          <View>
-            <SmallItemPicker
-              Data={Data}
-              onPick={index => setCheckedIndex(index)}></SmallItemPicker>
-          </View>
+
+          <SmallItemPicker
+            Data={Data}
+            onPick={index => setCheckedIndex(index)}></SmallItemPicker>
 
           <TextSeparator>Free delivery now</TextSeparator>
 
@@ -169,15 +160,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: colors.grey5,
     marginHorizontal: 20,
-  },
-  separator: {
-    backgroundColor: colors.grey5,
-    marginTop: 10,
-  },
-  separatorText: {
-    paddingLeft: 10,
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingVertical: 2,
   },
 });
