@@ -1,10 +1,7 @@
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-
-import {View, Text} from 'react-native';
 import React from 'react';
 import SignInWelcomeScreen from '../screens/authScreens/SignInWelcomeScreen';
 import SignInScreen from '../screens/authScreens/SignInScreen';
-import HomeScreen from '../screens/HomeScreen';
 import ClientTabs from './ClientTabs';
 import RestaurantsMapScreen from '../screens/RestaurantsMapScreen';
 

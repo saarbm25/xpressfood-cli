@@ -104,42 +104,52 @@ export const restaurantData = [
 export const Data = [
   {
     id: '0',
-    name: 'whatever1',
+    name: 'Whatever1',
     icon: 'bed',
   },
   {
     id: '1',
-    name: 'whatever2',
+    name: 'Whatever2',
     icon: 'bed-double',
   },
   {
     id: '2',
-    name: 'whatever3',
+    name: 'Whatever3',
     icon: 'bed-queen',
   },
   {
     id: '3',
-    name: 'whatever4',
+    name: 'Whatever4',
     icon: 'bed-outline',
   },
   {
     id: '4',
-    name: 'whatever5',
+    name: 'Whatever5',
     icon: 'bell-alert',
   },
   {
     id: '5',
-    name: 'whatever6',
+    name: 'Whatever6',
     icon: 'bell-plus',
   },
   {
     id: '6',
-    name: 'whatever7',
+    name: 'Whatever7',
     icon: 'betamax',
   },
   {
     id: '7',
-    name: 'whatever8',
+    name: 'Whatever8',
+    icon: 'biohazard',
+  },
+  {
+    id: '8',
+    name: 'cat',
+    icon: 'biohazard',
+  },
+  {
+    id: '9',
+    name: 'catttt',
     icon: 'biohazard',
   },
 ];

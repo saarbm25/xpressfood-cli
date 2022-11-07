@@ -14,7 +14,10 @@ const clientTabs = createBottomTabNavigator();
 export default function ClientTabs() {
   return (
     <clientTabs.Navigator
-      screenOptions={{tabBarActiveTintColor: colors.button}}>
+      screenOptions={{
+        tabBarActiveTintColor: colors.button,
+        tabBarHideOnKeyboard: true,
+      }}>
       <clientTabs.Screen
         name="HomeScreen"
         component={HomeScreen}
