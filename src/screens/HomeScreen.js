@@ -15,12 +15,14 @@ import {colors} from '../global/styles';
 import {Data, restaurantData} from '../global/Data';
 import {color} from '@rneui/base';
 import Card from '../components/Card';
+import SmallItemPicker from '../components/SmallItemPicker';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
   const [indexCheck, useIndexCheck] = useState('0');
+  const [checkedIndex, setCheckedIndex] = useState('0');
 
   const setDelivery = () => {
     useDelivery(true);
@@ -86,41 +88,9 @@ export default function HomeScreen({navigation}) {
           </View>
 
           <View>
-            <FlatList
-              data={Data}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={item => item.id}
-              extraData={indexCheck}
-              renderItem={({item, index}) => (
-                <TouchableOpacity
-                  onPress={() => useIndexCheck(item.id)}
-                  style={
-                    item.id === indexCheck
-                      ? styles.checkedSmallCardContainer
-                      : styles.smallCardContainer
-                  }>
-                  <View style={styles.smallCardContent}>
-                    <Icon
-                      style={
-                        item.id === indexCheck
-                          ? styles.checkedSmallCardIcon
-                          : styles.smallCardIcon
-                      }
-                      name={item.icon}
-                      size={28}
-                      color={colors.grey2}></Icon>
-                    <Text
-                      style={
-                        item.id === indexCheck
-                          ? styles.checkedSmallCardText
-                          : styles.smallCardText
-                      }>
-                      {item.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}></FlatList>
+            <SmallItemPicker
+              Data={Data}
+              onPick={index => setCheckedIndex(index)}></SmallItemPicker>
           </View>
 
           <View style={styles.separator}>
@@ -257,46 +227,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     paddingVertical: 2,
-  },
-  smallCardContainer: {
-    height: 100,
-    width: 85,
-    margin: 5,
-    backgroundColor: colors.grey5,
-    borderRadius: 30,
-  },
-  checkedSmallCardContainer: {
-    height: 100,
-    width: 85,
-    margin: 5,
-    backgroundColor: colors.button,
-    borderRadius: 30,
-  },
-  smallCardContent: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  smallCardIcon: {
-    backgroundColor: colors.white,
-    borderRadius: 100,
-    padding: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkedSmallCardIcon: {
-    backgroundColor: colors.white,
-    borderRadius: 100,
-    padding: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: colors.button,
-  },
-  smallCardText: {
-    fontWeight: 'bold',
-  },
-  checkedSmallCardText: {
-    fontWeight: 'bold',
-    color: colors.white,
   },
 });
