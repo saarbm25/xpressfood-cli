@@ -126,9 +126,9 @@ export default function HomeScreen({navigation}) {
                   screenWidth={SCREEN_WIDTH * 0.8}></Card>
               )}></FlatList>
           </View>
-          <View style={styles.separator}>
-            <Text style={styles.separatorText}>Restaurants in your area</Text>
-          </View>
+
+          <TextSeparator>Restaurants in your area</TextSeparator>
+
           <View>
             <FlatList
               horizontal={true}
