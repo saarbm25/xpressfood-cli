@@ -17,7 +17,7 @@ export default function Card({
 }) {
   return (
     <View style={[styles.container, {width: screenWidth}]}>
-      <TouchableOpacity style={[styles.card]}>
+      <TouchableOpacity style={[styles.card]} onPress={onPress}>
         <View style={styles.reviewContainer}>
           <Text style={[styles.reviewText, {fontSize: 18}]}>
             {averageReview}

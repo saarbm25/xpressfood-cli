@@ -17,6 +17,7 @@ import {color} from '@rneui/base';
 import Card from '../components/Card';
 import SmallItemPicker from '../components/SmallItemPicker';
 import TextSeparator from '../components/TextSeparator';
+import CardFlatList from '../components/CardFlatList';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -88,64 +89,27 @@ export default function HomeScreen({navigation}) {
               Data={Data}
               onPick={index => setCheckedIndex(index)}></SmallItemPicker>
           </View>
+
           <TextSeparator>Free delivery now</TextSeparator>
-          <View>
-            <FlatList
-              horizontal={true}
-              data={restaurantData}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <Card
-                  image={item.image}
-                  restaurant={item.restaurantName}
-                  distance={item.distance}
-                  averageReview={item.averageReview}
-                  numberOfReviews={item.numberOfReviews}
-                  address={item.address}
-                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
-              )}></FlatList>
-          </View>
+
+          <CardFlatList
+            Data={restaurantData}
+            cardWidth={SCREEN_WIDTH * 0.8}
+            onPick={() => {}}></CardFlatList>
 
           <TextSeparator>Promotions avaliable</TextSeparator>
 
-          <View>
-            <FlatList
-              horizontal={true}
-              data={restaurantData}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <Card
-                  image={item.image}
-                  restaurant={item.restaurantName}
-                  distance={item.distance}
-                  averageReview={item.averageReview}
-                  numberOfReviews={item.numberOfReviews}
-                  address={item.address}
-                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
-              )}></FlatList>
-          </View>
+          <CardFlatList
+            Data={restaurantData}
+            cardWidth={SCREEN_WIDTH * 0.8}
+            onPick={() => {}}></CardFlatList>
 
           <TextSeparator>Restaurants in your area</TextSeparator>
 
-          <View>
-            <FlatList
-              horizontal={true}
-              data={restaurantData}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <Card
-                  image={item.image}
-                  restaurant={item.restaurantName}
-                  distance={item.distance}
-                  averageReview={item.averageReview}
-                  numberOfReviews={item.numberOfReviews}
-                  address={item.address}
-                  screenWidth={SCREEN_WIDTH * 0.8}></Card>
-              )}></FlatList>
-          </View>
+          <CardFlatList
+            Data={restaurantData}
+            cardWidth={SCREEN_WIDTH * 0.8}
+            onPick={() => {}}></CardFlatList>
         </ScrollView>
 
         <View style={styles.mapButtonContainer}>
