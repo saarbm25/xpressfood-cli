@@ -16,6 +16,7 @@ import {Data, restaurantData} from '../global/Data';
 import {color} from '@rneui/base';
 import Card from '../components/Card';
 import SmallItemPicker from '../components/SmallItemPicker';
+import TextSeparator from '../components/TextSeparator';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -58,7 +59,6 @@ export default function HomeScreen({navigation}) {
               </TouchableOpacity>
             </View>
           </View>
-
           <View style={{flexDirection: 'row'}}>
             <View style={styles.spaceTimeContainer}>
               <View style={styles.tabButtonContainer}>
@@ -82,21 +82,13 @@ export default function HomeScreen({navigation}) {
               <Icon name="tune" size={28} color={colors.grey2}></Icon>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.separator}>
-            <Text style={styles.separatorText}>Categories</Text>
-          </View>
-
+          <TextSeparator>Categories</TextSeparator>
           <View>
             <SmallItemPicker
               Data={Data}
               onPick={index => setCheckedIndex(index)}></SmallItemPicker>
           </View>
-
-          <View style={styles.separator}>
-            <Text style={styles.separatorText}>Free delivery now</Text>
-          </View>
-
+          <TextSeparator>Free delivery now</TextSeparator>
           <View>
             <FlatList
               horizontal={true}
@@ -115,9 +107,7 @@ export default function HomeScreen({navigation}) {
               )}></FlatList>
           </View>
 
-          <View style={styles.separator}>
-            <Text style={styles.separatorText}>Promotions avaliable</Text>
-          </View>
+          <TextSeparator>Promotions avaliable</TextSeparator>
 
           <View>
             <FlatList
@@ -136,11 +126,9 @@ export default function HomeScreen({navigation}) {
                   screenWidth={SCREEN_WIDTH * 0.8}></Card>
               )}></FlatList>
           </View>
-
           <View style={styles.separator}>
             <Text style={styles.separatorText}>Restaurants in your area</Text>
           </View>
-
           <View>
             <FlatList
               horizontal={true}
