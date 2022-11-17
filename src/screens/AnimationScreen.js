@@ -7,7 +7,7 @@ import {
   useWindowDimensions,
   PanResponder,
 } from 'react-native';
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useRef} from 'react';
 import {colors} from '../global/styles';
 
 export default function AnimationScreen() {

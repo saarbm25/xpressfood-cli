@@ -8,12 +8,15 @@ import {Data, restaurantData} from '../global/Data';
 import SmallItemPicker from '../components/SmallItemPicker';
 import TextSeparator from '../components/TextSeparator';
 import CardFlatList from '../components/CardFlatList';
+import {useDispatch} from 'react-redux';
+import { setCategory } from '../redux/actions';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen({navigation}) {
   const [delivery, useDelivery] = useState(true);
   const [checkedIndex, setCheckedIndex] = useState('0');
+  const dispatch = useDispatch();
 
   const setDelivery = () => {
     useDelivery(true);
@@ -79,7 +82,7 @@ export default function HomeScreen({navigation}) {
 
           <SmallItemPicker
             Data={Data}
-            onPick={index => setCheckedIndex(index)}></SmallItemPicker>
+            onPick={index => dispatch(setCategory(index))}></SmallItemPicker>
 
           <TextSeparator>Free delivery now</TextSeparator>
 

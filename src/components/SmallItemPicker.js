@@ -2,10 +2,10 @@ import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors} from '../global/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useState} from 'react';
+import {useSelector} from 'react-redux';
 
 export default function SmallItemPicker({Data, onPick}) {
-  const [localCheckedIndex, setLocalCheckedIndex] = useState('0');
+  const {category} = useSelector(state => state.categoryReducer);
 
   return (
     <View>
@@ -15,22 +15,21 @@ export default function SmallItemPicker({Data, onPick}) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id}
-          extraData={localCheckedIndex}
+          extraData={category}
           renderItem={({item, index}) => (
             <TouchableOpacity
               onPress={() => {
-                setLocalCheckedIndex(item.id);
                 onPick(item.id);
               }}
               style={
-                item.id === localCheckedIndex
+                item.id === category
                   ? styles.checkedSmallCardContainer
                   : styles.smallCardContainer
               }>
               <View style={styles.smallCardContent}>
                 <Icon
                   style={
-                    item.id === localCheckedIndex
+                    item.id === category
                       ? styles.checkedSmallCardIcon
                       : styles.smallCardIcon
                   }
@@ -39,7 +38,7 @@ export default function SmallItemPicker({Data, onPick}) {
                   color={colors.grey2}></Icon>
                 <Text
                   style={
-                    item.id === localCheckedIndex
+                    item.id === category
                       ? styles.checkedSmallCardText
                       : styles.smallCardText
                   }>

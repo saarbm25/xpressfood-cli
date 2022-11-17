@@ -1,9 +1,9 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../global/styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function AppTextInput({ children, placeholder, icon, secure }) {
+export default function AppTextInput({ children, placeholder, icon, secure, onChangeText }) {
     const [visable, useVisable] = useState(secure);
     const [eye, useEye] = useState('eye');
     const changeVisibility = () => {
@@ -14,6 +14,7 @@ export default function AppTextInput({ children, placeholder, icon, secure }) {
       <View style={styles.container}>
           {icon && <Icon name={icon} size={28} color={colors.grey3} style={styles.icon}></Icon>}
           <TextInput
+              onChangeText={onChangeText}
               style={styles.inputText}
               placeholder={placeholder}
               secureTextEntry={visable}

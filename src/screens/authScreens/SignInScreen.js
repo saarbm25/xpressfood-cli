@@ -1,19 +1,16 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimentions,
-  TouchableHighlight,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {colors, parameters, globalStyles} from '../../global/styles';
 import Header from '../../components/Header';
 import AppTextInput from '../../components/AppTextInput';
 import AppButton from '../../components/AppButton';
+import {useDispatch, useSelector} from 'react-redux';
+import {setEmail, setPassword} from '../../redux/actions';
 
 export default function SignInScreen({navigation}) {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <Header
@@ -28,10 +25,14 @@ export default function SignInScreen({navigation}) {
           Please enter the email and password
         </Text>
       </View>
-      <AppTextInput placeholder="Email" icon="mail"></AppTextInput>
+      <AppTextInput
+        placeholder="Email"
+        icon="mail"
+        onChangeText={value => dispatch(setEmail(value))}></AppTextInput>
       <AppTextInput
         placeholder="Password"
         icon="lock"
+        onChangeText={value => dispatch(setPassword(value))}
         secure={true}></AppTextInput>
       <AppButton onPress={() => navigation.navigate('ClientTabs')}>
         SIGN IN

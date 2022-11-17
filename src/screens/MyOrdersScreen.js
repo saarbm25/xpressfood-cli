@@ -1,11 +1,10 @@
 import {
   View,
-  Text,
   StyleSheet,
   Animated,
   useWindowDimensions,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {colors} from '../global/styles';
 
 export default function MyOrdersScreen() {

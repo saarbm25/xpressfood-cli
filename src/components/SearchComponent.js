@@ -1,30 +1,28 @@
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import {colors} from '../global/styles';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchBar from './SearchBar';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {color} from '@rneui/base';
-import {Data} from '../global/Data';
+import { Data } from '../global/Data';
+import {useSelector} from 'react-redux';
 
-export default function SearchComponent() {
+export default function SearchComponent({reduxSetter}) {
   const [searchVisable, setSearchVisable] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
+  const {searchTerm} = useSelector(state => state.searchReducer);
   const changeVisable = () => {
     setSearchVisable(!searchVisable);
-    console.log(searchInput);
   };
   const onChange = text => {
     let filtered = Data.filter(item => item.name.includes(text));
     setFilteredData(filtered);
-    setSearchInput(text);
+    reduxSetter(text);
   };
   const [filteredData, setFilteredData] = useState(Data);
 
   return (
     <View>
       <SearchBar
-        textValue={searchInput}
+        textValue={searchTerm}
         onFocusChanged={changeVisable}
         onChange={onChange}></SearchBar>
       <View>
@@ -35,7 +33,7 @@ export default function SearchComponent() {
             renderItem={({item}) => (
               <TouchableOpacity
                 style={styles.searchItem}
-                onPress={() => setSearchInput(item.name)}>
+                onPress={() => reduxSetter(item.name)}>
                 <Text style={styles.searchItemText}>{item.name}</Text>
               </TouchableOpacity>
             )}></FlatList>
