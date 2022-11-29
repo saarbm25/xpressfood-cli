@@ -38,6 +38,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+
+!node_modules/react-native-camera/src/RNCamera.js
+
 # BUCK
 buck-out/
 \.buckd/
