@@ -5,6 +5,7 @@ import {
   Linking,
   TouchableOpacity,
   Modal,
+  Dimensions,
 } from 'react-native';
 import React, {useRef} from 'react';
 import {colors} from '../global/styles';
@@ -21,12 +22,13 @@ export default function MyOrdersScreen() {
   const [code, setCode] = useState('');
 
   onSuccess = e => {
-    setCode(e.data);
+    setCode(e);
     setModalVisible(true);
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.testing}></View>
       <View style={styles.topContainer}>
         <Text>whatever is up here</Text>
       </View>
@@ -70,15 +72,32 @@ export default function MyOrdersScreen() {
   );
 }
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const markerStartHeight = windowHeight * 0.3;
+const markerStartWidth = windowWidth * 0.1;
+const markerEndHeight = markerStartHeight + windowWidth * 0.8;
+const markerEndWidth = 0;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  testing: {
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8,
+    backgroundColor: colors.blue,
+    zIndex: 3,
+    position: 'absolute',
+    top: markerStartHeight,
+    left: markerStartWidth,
+  },
   topContainer: {
-    height: '25%',
-    width: '100%',
+    height: windowHeight * 0.25,
+    width: windowWidth,
     borderBottomStartRadius: 20,
     borderBottomEndRadius: 20,
     backgroundColor: colors.white,
@@ -102,11 +121,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     bottom: 20,
-  },
-  squre: {
-    width: 50,
-    height: 50,
-    backgroundColor: colors.button,
   },
   modal: {
     backgroundColor: colors.blue,

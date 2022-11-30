@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import {colors} from '../global/styles';
 
@@ -14,11 +14,15 @@ export default function Marker() {
     </View>
   );
 }
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   marker: {
-    width: 300,
-    height: 300,
-    marginTop: 100,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8,
+    marginTop: windowHeight * 0.1,
   },
   topLeftEdge: {
     position: 'absolute',

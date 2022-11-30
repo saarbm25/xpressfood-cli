@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, StatusBar, SafeAreaView} from 'react-native';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {colors} from './src/global/styles';
@@ -9,12 +9,14 @@ import {Store} from './src/redux/store';
 export default function App() {
   return (
     <Provider store={Store}>
-      <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={colors.statusBar}></StatusBar>
-        <RootNavigator></RootNavigator>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colors.statusBar}></StatusBar>
+          <RootNavigator></RootNavigator>
+        </View>
+      </SafeAreaView>
     </Provider>
   );
 }
