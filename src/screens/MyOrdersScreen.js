@@ -27,47 +27,8 @@ export default function MyOrdersScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.testing}></View>
-      <View style={styles.topContainer}>
-        <Text>whatever is up here</Text>
-      </View>
-      <QRCodeScanner
-        reactivate={true}
-        reactivateTimeout={3000}
-        onRead={this.onSuccess}
-        flashMode={
-          flash
-            ? RNCamera.Constants.FlashMode.torch
-            : RNCamera.Constants.FlashMode.off
-        }
-        cameraStyle={{height: '100%', width: '100%'}}
-        fadeIn={true}
-        showMarker={true}
-        customMarker={<Marker />}
-      />
-      <TouchableOpacity
-        style={styles.flash}
-        onPress={() => {
-          setFlash(state => !state);
-        }}>
-        <Icon name="flash" size={32} color={colors.white}></Icon>
-      </TouchableOpacity>
-      <Modal
-        style={styles.modal}
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}>
-        <View style={styles.popUp}>
-          <AppButton
-            onPress={() => {
-              setModalVisible(false);
-            }}>
-            Kill me
-          </AppButton>
-          <Text>qr data is {code}</Text>
-        </View>
-      </Modal>
+    <View>
+      <Text>moved to RestaurantsMapsScreen</Text>
     </View>
   );
 }

@@ -18,11 +18,14 @@ export default function Marker() {
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+export const markerWidth = windowWidth * 0.8;
+export const markerTopMargin = windowHeight * 0.1;
+
 const styles = StyleSheet.create({
   marker: {
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.8,
-    marginTop: windowHeight * 0.1,
+    width: markerWidth,
+    height: markerWidth,
+    marginTop: markerTopMargin,
   },
   topLeftEdge: {
     position: 'absolute',

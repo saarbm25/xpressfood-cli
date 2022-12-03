@@ -9,7 +9,7 @@ import SmallItemPicker from '../components/SmallItemPicker';
 import TextSeparator from '../components/TextSeparator';
 import CardFlatList from '../components/CardFlatList';
 import {useDispatch} from 'react-redux';
-import { setCategory } from '../redux/actions';
+import {setCategory} from '../redux/actions';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -110,8 +110,8 @@ export default function HomeScreen({navigation}) {
           <TouchableOpacity
             style={styles.mapButton}
             onPress={() => navigation.navigate('RestaurantsMapScreen')}>
-            <Icon name="map-marker" size={28} color={colors.button}></Icon>
-            <Text style={{fontWeight: 'bold'}}>Map</Text>
+            <Icon name="qrcode" size={28} color={colors.button}></Icon>
+            <Text style={{fontWeight: 'bold'}}>Scan</Text>
           </TouchableOpacity>
         </View>
       </View>
