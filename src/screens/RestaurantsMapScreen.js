@@ -17,6 +17,82 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Marker, {markerTopMargin, markerWidth} from '../components/Marker';
 import AppButton from '../components/AppButton';
 
+const isInsideBoundary = e => {
+  let inBound;
+  if (Platform.OS === 'android') {
+    inBound = isInsideBoundaryAndroid(e);
+  } else {
+    inBound = isInsideBoundaryIos(e.bounds);
+  }
+
+  return inBound;
+};
+
+const isInsideBoundaryAndroid = e => {
+  // Get the qr corners
+  const qrOrigins = e.bounds.origin;
+
+  // Scaler to match screen size units to camera pixels
+  const cameraWidth = e.bounds.width;
+  const cameraHeight = e.bounds.height;
+
+  // Camera is in landscape mode
+  // Camera width is matched to screen height
+  const widthScaler = cameraWidth / windowHeight;
+  const markerTopMarginCameraPx = (markerTopMargin * widthScaler) / 2;
+
+  // Create a marker object for boundary checks
+  const markerOrigin = {
+    x: (cameraHeight - markerSizeCameraPx) / 2,
+    y: (cameraWidth - markerSizeCameraPx) / 2 + markerTopMarginCameraPx,
+    size: markerWidth * widthScaler,
+  };
+
+  const qrInBounds = true;
+
+  // For each point in the QR
+  qrOrigins.array.forEach(origin => {
+    const inMarkerBoundsX =
+      origin.y >= markerOrigin.y &&
+      origin.y <= markerOrigin.y + markerOrigin.size;
+    const inMarkerBoundsY =
+      origin.x >= markerOrigin.x &&
+      origin.x <= markerOrigin.x + markerOrigin.size;
+
+    // If not in bounds set flag to false
+    if (!inMarkerBoundsX || !inMarkerBoundsY) {
+      qrInBounds = false;
+    }
+  });
+
+  return qrInBounds;
+};
+
+const isInsideBoundaryIos = bounds => {
+  const markerOrigin = {
+    x: (Dimensions.get('screen').width - markerWidth) / 2,
+    y: (Dimensions.get('screen').height - markerHeight) / 2,
+  };
+
+  // Checking that QR not steps out of the marker in the left/top sides
+  if (bounds.origin.x <= markerOrigin.x || bounds.origin.y <= markerOrigin.y) {
+    return false;
+  }
+
+  // Checking that QR not steps out of the marker in the right/bottom sides
+  const isStepsWidth =
+    Number(bounds.origin.x) + Number(bounds.size.width) >=
+    markerOrigin.x + markerWidth;
+  const isStepsHeight =
+    Number(bounds.origin.y) + Number(bounds.size.height) >=
+    markerOrigin.y + markerHeight;
+  if (isStepsWidth || isStepsHeight) {
+    return false;
+  }
+
+  return true;
+};
+
 export default function RestaurantsMapScreen() {
   const [flash, setFlash] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,41 +100,12 @@ export default function RestaurantsMapScreen() {
 
   const [qrInBound, setQrInBound] = useState(false);
 
-  const isInMarker = e => {
-    console.log(e.bounds); // test for ios
-
-    const origins = e.bounds.origin;
-
-    // width and height are swapped in camera
-    const cameraWidth = e.bounds.width;
-    const cameraHeight = e.bounds.height;
-
-    const widthScaler = cameraWidth / windowHeight;
-
-    const markerSizeInCamera = markerWidth * widthScaler;
-    const markerTopMarginScaled = (markerTopMargin * widthScaler) / 2;
-    const markerStartInY = cameraHeight / 2 - 0.5 * markerSizeInCamera;
-    const markerStartInX =
-      cameraWidth / 2 - 0.5 * markerSizeInCamera + markerTopMarginScaled;
-
-    if (
-      origins[0].y >= markerStartInY &&
-      origins[0].y <= markerStartInY + markerSizeInCamera &&
-      origins[0].x >= markerStartInX &&
-      origins[0].x <= markerStartInX + markerSizeInCamera
-    ) {
-      return true;
-    }
-
-    return false;
-  };
-
   onSuccess = e => {
     try {
-      const origin0IsInMarker = isInMarker(e);
-      setQrInBound(origin0IsInMarker);
-      setCode(e.data);
-      // setModalVisible(true);
+      const inBounds = isInsideBoundary(e);
+      console.log(inBounds);
+      setQrInBound(inBounds);
+      console.log(e.data);
     } catch (err) {
       console.log(err);
     }
@@ -71,7 +118,7 @@ export default function RestaurantsMapScreen() {
       </View>
       <QRCodeScanner
         reactivate={true}
-        reactivateTimeout={0}
+        reactivateTimeout={100}
         onRead={this.onSuccess}
         flashMode={
           flash
