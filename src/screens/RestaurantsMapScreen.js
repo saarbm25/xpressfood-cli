@@ -31,6 +31,7 @@ const isInsideBoundary = e => {
 const isInsideBoundaryAndroid = e => {
   // Get the qr corners
   const qrOrigins = e.bounds.origin;
+  console.log(qrOrigins);
 
   // Scaler to match screen size units to camera pixels
   const cameraWidth = e.bounds.width;
@@ -43,21 +44,23 @@ const isInsideBoundaryAndroid = e => {
 
   // Create a marker object for boundary checks
   const markerOrigin = {
-    x: (cameraHeight - markerSizeCameraPx) / 2,
-    y: (cameraWidth - markerSizeCameraPx) / 2 + markerTopMarginCameraPx,
+    x: (cameraHeight - markerWidth * widthScaler) / 2,
+    y: (cameraWidth - markerWidth * widthScaler) / 2 + markerTopMarginCameraPx,
     size: markerWidth * widthScaler,
   };
 
-  const qrInBounds = true;
+  let qrInBounds = true;
 
   // For each point in the QR
-  qrOrigins.array.forEach(origin => {
+  qrOrigins.forEach(origin => {
+    // Camera is in landscape - y in camera is x in screen
     const inMarkerBoundsX =
-      origin.y >= markerOrigin.y &&
-      origin.y <= markerOrigin.y + markerOrigin.size;
+      origin.y >= markerOrigin.x &&
+      origin.y <= markerOrigin.x + markerOrigin.size;
+    // Camera is in landscape - x in camera is y in screen
     const inMarkerBoundsY =
-      origin.x >= markerOrigin.x &&
-      origin.x <= markerOrigin.x + markerOrigin.size;
+      origin.x >= markerOrigin.y &&
+      origin.x <= markerOrigin.y + markerOrigin.size;
 
     // If not in bounds set flag to false
     if (!inMarkerBoundsX || !inMarkerBoundsY) {
